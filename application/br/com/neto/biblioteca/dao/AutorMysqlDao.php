@@ -6,7 +6,7 @@ namespace br\com\neto\biblioteca\dao{
 	class AutorMysqlDao{
 	
 		public function getAutorPorId($id){
-			$stm = ConexaoMysql::getInstance()->prepare("Select * From autor id Where id = ?");
+			$stm = ConexaoMysql::getInstance()->prepare("SELECT * FROM autor id Where id = ?");
    			$stm->execute(array($id));
    			
    			$obj = new $stm->fetchObject();
@@ -29,7 +29,7 @@ namespace br\com\neto\biblioteca\dao{
 			$stm->execute(array($autor->getNome(), $autor->getId()));
 			}
 			else{
-			$stm = ConexaoMysql::getInstance()->prepare("INSERT INTO autor VALUES  nome = ? ");
+			$stm = ConexaoMysql::getInstance()->prepare("INSERT INTO autor (nome) VALUES (?)");
 			$stm->execute(array($autor->getNome()));		
 			$autor->setId(ConexaoMysql::getInstance()->lastInsertId());
 			}		
